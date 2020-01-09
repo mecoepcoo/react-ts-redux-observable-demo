@@ -1,18 +1,20 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { updateCounter, ICounterState } from '@/redux/counter'
 
-const countStep = 1
+const counterStep = 1
 
-interface props {
-  count: any
-  decrement: any
-  increment: any
-}
+const mappedState = (state: ICounterState) => ({
+  count: state.count
+})
 
-const counterComponent: React.FC<props> = (props: props) => {
-  console.log(props)
+const counterComponent: React.FC<any> = (props: any) => {
+  const count = useSelector((state: ICounterState) => state.count)
+  console.log(count)
+
   return (
     <div className="App">
-      <h1>{props.count}</h1>
+      {/* <h1>{count}</h1> */}
       <button type="button" onClick={props.decrement}>
         -
       </button>
