@@ -1,24 +1,29 @@
 import React, { useContext, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { updateCounter, ICounterState } from '@/redux/counter'
 
 const counterStep = 1
 
-const mappedState = (state: ICounterState) => ({
-  count: state.count
-})
-
 const counterComponent: React.FC<any> = (props: any) => {
-  const count = useSelector((state: ICounterState) => state.count)
-  console.log(count)
+  const { counter } = useSelector((state: ICounterState) => state)
+
+  const dispatch = useDispatch()
+
+  const decrement = () => {
+    dispatch(updateCounter(-counterStep))
+  }
+
+  const increment = () => {
+    dispatch(updateCounter(counterStep))
+  }
 
   return (
     <div className="App">
-      {/* <h1>{count}</h1> */}
-      <button type="button" onClick={props.decrement}>
+      <h1>{counter}</h1>
+      <button type="button" onClick={decrement}>
         -
       </button>
-      <button type="button" onClick={props.increment}>
+      <button type="button" onClick={increment}>
         +
       </button>
     </div>

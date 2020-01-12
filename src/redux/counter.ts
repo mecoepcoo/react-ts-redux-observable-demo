@@ -18,15 +18,15 @@ export type ModifyAction = IUpdateCounter | IUpdateComplete
 const initialCount = 0
 
 export interface ICounterState {
-  count: number
+  counter: number
 }
 
-export function counterReducer(state: ICounterState = { count: initialCount }, action: ModifyAction): ICounterState {
+export function counter(state = initialCount, action: ModifyAction): number {
   switch (action.type) {
     case UPDATE_COUNTER:
       return state
     case UPDATE_COMPLETE:
-      return { count: state.count + action.payload }
+      return state + action.payload
     default:
       return state
   }
